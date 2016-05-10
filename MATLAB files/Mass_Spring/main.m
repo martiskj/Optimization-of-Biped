@@ -16,11 +16,6 @@ x_guess = cos(t);
 x_dot_guess = [0, diff(x_guess)./h_k];
 initial_guess = [x_guess; x_dot_guess];
 
-figure;
-plot(t, initial_guess(1,:));
-xlabel('time');
-ylabel('position')
-title('Initial trajectory')
 %% Optimization
 solution = optimization(initial_guess, parameters);
 

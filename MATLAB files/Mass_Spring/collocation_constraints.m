@@ -9,13 +9,15 @@ function [c,ceq] = collocation_constraints(x,parameters)
 
 h_k = parameters(end);
 N = length(x);
-ceq = zeros(2*N+1,1);
-for k=1:N-1
-    ceq(k:k+1) = x(:,k) - x(:,k+1) + h_k/2 * (dynamics(x(:,k+1),parameters) + dynamics(x(:,k),parameters));
+ceq = zeros(2*(N+1),1);
+
+for k=2:N
+    ceq(2*k-1:2*k) = x(:,k-1) - x(:,k) + h_k/2 * (dynamics(x(:,k), parameters) + dynamics(x(:,k-1), parameters));
 end
 
 % Boundary constraints (start velocity = 0)
-ceq = [ceq; x(2,1)];
+ceq(1:2) = [0, x(2,1)];
+ceq(end-1:end) = [0, 0];
 
 % No inequality constraints
 c = [];
