@@ -5,14 +5,14 @@ function solution = optimization(x_init, parameters)
 % Possible to try a more sophisticated approach
 
 
-%% Try to energy efficient pendulum movement to move a cart-pendulum system
+%% Try to find least amount of energy 
 
-% Path constraints
+% Path constraints (no constraints on velocity)
 x_lb = zeros(2,length(x_init));
-x_lb(1,:) = -pi/2;
+x_lb(1,:) = -2;
 x_lb(2,:) = -inf;
 x_ub = zeros(2,length(x_init));
-x_ub(1,:) = pi/2;
+x_ub(1,:) = 2;
 x_ub(2,:) = inf;
 
 optionsFMINCON = optimoptions(@fmincon, 'Algorithm', 'interior-point', 'Display', 'iter');
