@@ -12,9 +12,10 @@ h_k = T_max/(N-1);
 t = (0:h_k:T_max);
 parameters = [M, mp, Lc, g, Jp];
 
-x_guess = cos(t);
-x_dot_guess = [0, diff(x_guess)./h_k];
-initial_guess = [x_guess; x_dot_guess];
+% Include "everything" in x:
+% x = [theta; theta_dot; cart_pos; cart_pos_dot]
+% AND need to include T_max at the end
+
 
 %% Optimization
 solution = optimization(initial_guess, parameters);
