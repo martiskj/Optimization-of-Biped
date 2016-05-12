@@ -5,10 +5,12 @@ function x_dot = dynamics(x, parameters)
 
 %% Cart-pendulum system
 M = parameters(1); mp = parameters(2); Lc = parameters(3); g = parameters(4); mu = parameters(5); Jp = parameters(6)
-x1 = x(1); % Angle of pendulum
-x2 = x(2); %velocity
+x1 = x(1); % theta
+x2 = x(2); % dtheta
+x3 = x(3); % x
 
-x1_dot = x2;
-x2_dot = -k/m*x1;
+
+% INSERT EOM
+
 
 x_dot = 
