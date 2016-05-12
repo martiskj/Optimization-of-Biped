@@ -1,5 +1,5 @@
 function cost = objective_function(x)
 
-%% Try to find largest possible displacement of mass spring system
+%% Try to find largest possible distance the cart can travel (for testing)
 
-cost = -max(x(1,:));
+cost = -max(x(3,:));

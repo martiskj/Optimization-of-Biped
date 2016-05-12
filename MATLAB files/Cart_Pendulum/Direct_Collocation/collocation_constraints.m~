@@ -8,17 +8,17 @@ function [c,ceq] = collocation_constraints(x,parameters)
 %%
 
 h_k = parameters(end);
-[dim, N] = size(x);
-ceq = zeros(dim*(N+1),1);
+[dimension, N] = size(x);
+ceq = zeros(dimension*(N+1),1);
 
-for k=dim:N
-    ceq(dim*k-1:dim*k) = x(:,k-1) - x(:,k) + h_k/2 * (dynamics(x(:,k), parameters) + dynamics(x(:,k-1), parameters));
+for k=2:N
+    ceq(2*k-1:2*k) = x(:,k-1) - x(:,k) + h_k/2 * (dynamics(x(:,k), parameters) + dynamics(x(:,k-1), parameters));
 end
 
 % Boundary constraints
-% (theta0 = 0, dtheta0 = 0, x0 = 0, dx0 = 0)
-ceq(1:dim) = [x(1,1), x(2,1), x(3,1), x(4,1), 0, 0];
-ceq(end-(dim-1):end) = [0, 0, 0, 0, 0, 0];
+% (theta0 = 0, dtheta0 = 0)
+ceq(1:dimension) = [x(1,1), x(2,1), ];
+ceq(end-(dimension-1):end) = [0, 0];
 
 % Inequality constraints
 c = [];

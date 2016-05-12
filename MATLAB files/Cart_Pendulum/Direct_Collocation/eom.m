@@ -26,10 +26,12 @@ eqn3 = simplify(fulldiff(diff(L,dy),GC) - diff(L,y)) == 0;
 syms d2theta d2x d2y
 
 [d2theta, d2x, d2y] = solve([eqn1, eqn2, eqn3], [d2theta, d2x, d2y]);
+taup = solve(eqn2, taup);
 
 d2theta = simplify(d2theta)
 d2x = simplify(d2x)
 d2y = simplify(d2y)
+taup = simplify(taup)
 
 
 % To display with latex syntax:
