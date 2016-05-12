@@ -1,4 +1,4 @@
-function [c,ceq] = collocation_constraints(x, u, parameters)
+function [c,ceq] = collocation_constraints(x, parameters)
 %% Defines constraints via vectors c and ceq
 % c <= 0
 % ceq = 0
@@ -7,12 +7,15 @@ function [c,ceq] = collocation_constraints(x, u, parameters)
 % Approximating done with the trapezoidation method: x_(k+1) = x_k + h_k/2*(f_(k+1) + f_k)
 %%
 
+u = x(7,:);
+x = x(1:6,:);
+
 h_k = parameters(end);
 [dim, N] = size(x);
 ceq = zeros(dim*(N+1),1);
 
-for k=dim:N
-    ceq(dim*k-1:dim*k) = x(:,k-1) - x(:,k) + h_k/2 * (dynamics(x(:,k), u(:,k), parameters) + dynamics(x(:,k-1), u(:,k), parameters));
+for k=2:N
+    ceq(dim*(k-1)+1:dim*k) = x(:,k-1) - x(:,k) + h_k/2 * (dynamics(x(:,k), u(:,k), parameters) + dynamics(x(:,k-1), u(:,k), parameters));
 end
 
 % Boundary constraints
