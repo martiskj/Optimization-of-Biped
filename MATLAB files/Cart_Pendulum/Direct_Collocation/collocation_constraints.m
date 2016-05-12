@@ -1,4 +1,4 @@
-function [c,ceq] = collocation_constraints(x,parameters)
+function [c,ceq] = collocation_constraints(x, u, parameters)
 %% Defines constraints via vectors c and ceq
 % c <= 0
 % ceq = 0
@@ -12,7 +12,7 @@ h_k = parameters(end);
 ceq = zeros(dim*(N+1),1);
 
 for k=dim:N
-    ceq(dim*k-1:dim*k) = x(:,k-1) - x(:,k) + h_k/2 * (dynamics(x(:,k), parameters) + dynamics(x(:,k-1), parameters));
+    ceq(dim*k-1:dim*k) = x(:,k-1) - x(:,k) + h_k/2 * (dynamics(x(:,k), u(:,k), parameters) + dynamics(x(:,k-1), u(:,k), parameters));
 end
 
 % Boundary constraints
