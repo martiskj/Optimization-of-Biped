@@ -48,7 +48,7 @@ for i = 1:length(samplePoints)
    plot(time, accuracies.(strcat('N',int2str(samplePoints(i))))(1,:))
    xlabel('Time (s)');
    ylabel('Error')
-   title(sprintf('Accuracy, N = %d', samplePoints(i)))
+   title(sprintf('Accuracy vs. Time, N = %d', samplePoints(i)))
 end
 
 figure;
