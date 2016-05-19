@@ -12,7 +12,7 @@ x_lb(1,:) = 0;
 x_lb(2,:) = -inf;
 % x_lb(end,end) = 0;
 x_ub = zeros(2,length(x_init));
-x_ub(1,:) = 4;
+x_ub(1,:) = 6;
 x_ub(2,:) = inf;
 % x_ub(end,end) = 20;
 

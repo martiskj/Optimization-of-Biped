@@ -21,9 +21,9 @@ end
 % To set no boundary, set the boundary to be equal to the state, i.e.
 % boundary.startVelocity = x(2,1) will set no constraint on startVelocity.
 
-boundary.startPosition = 4; 
+boundary.startPosition = x(1,1); 
 boundary.startVelocity = 0;
-boundary.endPosition = x(1,end);
+boundary.endPosition = x(1, end);
 boundary.endVelocity = x(2, end);
 
 ceq(1:2)        = [boundary.startPosition - x(1,1),      boundary.startVelocity - x(2,1)];
