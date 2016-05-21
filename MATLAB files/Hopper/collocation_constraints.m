@@ -21,10 +21,10 @@ end
 
 boundary.startPosition = x(1,1); 
 boundary.startVelocity = 0;
-boundary.endPosition = x(1, end);
-boundary.endVelocity = x(2, end);
+boundary.endPosition = x(1, 1);
+boundary.endVelocity = x(2, end-1);
 
 ceq(1:2)        = [boundary.startPosition - x(1,1),      boundary.startVelocity - x(2,1)];
 ceq(end-1:end)  = [boundary.endPosition   - x(1, end-1), boundary.endVelocity   - x(2, end-1)];
-%c = [x(end, end) - boundary.maxTime];
-c = [];
+
+c = [parameters(3) - x(1,1)];
