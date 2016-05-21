@@ -3,3 +3,8 @@
 !.gitignore
 !/MATLAB\ files/
 
+# Ignore filetypes:
+.DS_Store
+desktop.ini
+*.asv
+*.m~
