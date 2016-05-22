@@ -21,7 +21,7 @@ end
 
 boundary.startPosition = x(1,1); 
 boundary.startVelocity = 0;
-boundary.endPosition = x(1, 1);
+boundary.endPosition = x(1, end-1);
 boundary.endVelocity = x(2, end-1);
 
 ceq(1:2)        = [boundary.startPosition - x(1,1),      boundary.startVelocity - x(2,1)];
