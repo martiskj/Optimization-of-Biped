@@ -13,6 +13,6 @@ initial_guess = [guess.position; guess.velocity];
 initial_guess = [initial_guess, [0; guess.endTime]];
 
 %% Optimization
-solution = optimization(initial_guess, parameters);
+solution = optimization(initial_guess, parameters, 'fminsearch');
 plot_solution(solution)
 

@@ -1,4 +1,4 @@
-function solution = optimization(x_init, parameters)
+function solution = optimization(x_init, parameters, method)
 
 %% Optimization by direct collocation
 % Uses trapezoid method (assumes dynamics are linear between grid points)
@@ -16,7 +16,13 @@ x_ub(1,:) = 6;
 x_ub(2,:) = inf;
 x_ub(end,end) = 3;
 
-optionsFMINCON = optimoptions(@fmincon, 'Algorithm', 'active-set', 'Display', 'iter','maxFunEvals', 1e5);
-optimal_trajectory = fmincon(@objective_function, x_init, [],[],[],[], x_lb, x_ub, @(x) collocation_constraints(x,parameters), optionsFMINCON);
+switch method
+    case 'fmincon'
+        optionsFMINCON = optimoptions(@fmincon, 'Algorithm', 'active-set', 'Display', 'iter','maxFunEvals', 1e5);
+        optimal_trajectory = fmincon(@objective_function, x_init, [],[],[],[], x_lb, x_ub, @(x) collocation_constraints(x,parameters), optionsFMINCON);
+    case 'fminsearch'
+        optionsFMINSEARCH = optimset('Display', 'iter');
+        optimal_trajectory = fminsearch(@(x) objective_function_fminsearch(x, x_lb, x_ub, parameters), x_init, optionsFMINSEARCH);
+end
 
 solution = optimal_trajectory;
