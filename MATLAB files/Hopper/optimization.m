@@ -16,7 +16,7 @@ x_ub(1,:) = 6;
 x_ub(2,:) = inf;
 x_ub(end,end) = 3;
 
-optionsFMINCON = optimoptions(@fmincon, 'Algorithm', 'interior-point', 'Display', 'iter','maxFunEvals', 3e4);
+optionsFMINCON = optimoptions(@fmincon, 'Algorithm', 'active-set', 'Display', 'iter','maxFunEvals', 1e5);
 optimal_trajectory = fmincon(@objective_function, x_init, [],[],[],[], x_lb, x_ub, @(x) collocation_constraints(x,parameters), optionsFMINCON);
 
 solution = optimal_trajectory;
