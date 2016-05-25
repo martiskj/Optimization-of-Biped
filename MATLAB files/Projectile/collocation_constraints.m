@@ -24,12 +24,12 @@ end
 % boundary.startVelocity = x(2,1) will set no constraint on startVelocity.
 
 boundary.start_x = 0; 
-boundary.start_y = 0;
 boundary.start_dx = x(2,1);
+boundary.start_y = 0;
 boundary.start_dy = x(4,1);
-boundary.end_x = x(1,end-1);
-boundary.end_y = x(2,end-1); % Should add constraint y_end = 0. Somehow this causes trouble
-boundary.end_dx = x(3,end-1);
+boundary.end_x = 10; % Hit target
+boundary.end_dx = x(2,end-1);
+boundary.end_y = 0; % Stop when hit the ground
 boundary.end_dy = x(4,end-1);
 
 ceq(1:4)        = [boundary.start_x - x(1,1), boundary.start_dx - x(2,1), boundary.start_y - x(3,1), boundary.start_dy - x(4,1)];
