@@ -6,11 +6,6 @@ function x_dot = dynamics(x, t, dx0, dy0, parameters)
 %% Projectile system
 m = parameters(1); g = parameters(2);
 
-x1 = x(1); %x
-x2 = x(2); %dx
-x3 = x(3); %y
-x4 = x(4); %dy
-
 x1_dot = dx0;
 x2_dot = 0;
 x3_dot = dy0 - g*t;
