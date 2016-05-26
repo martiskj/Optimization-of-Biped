@@ -1,6 +1,6 @@
 function solution = run_shooting(x_init, guess, N, parameters)
     %% Starts optimization by direct collocation based on the guessed initial trajectory
-    % solution = run_direct_collocation(initial_guess, guess, parameters)
+    % solution = run_direct_collocation(initial_guess, guess, N, parameters)
     
     %%
     x_init = [x_init; guess.endTime];

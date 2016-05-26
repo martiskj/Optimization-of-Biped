@@ -10,15 +10,14 @@ init.dx = 1;
 init.y  = 0;
 init.dy = 1;
 
-initialVelocityGuess = [init.dx; init.dy];
 initialStateGuess = [init.x; init.dx; init.y; init.dy];
 parameters = set_parameters();
 guess.endTime = 3;
-%%
+N_shooting = 50;
 tic;
-solutionShooting = run_shooting(initialVelocityGuess);
+solutionShooting = run_shooting(initialStateGuess, guess, N_shooting, parameters);
 runTimeShooting = toc;
-%%
+
 samplePoints = [25, 50, 75, 100];
 runTimeDC = zeros(1, length(samplePoints));
 
@@ -42,14 +41,15 @@ for i=1:length(samplePoints)
 	currentSolution = solutionDC.(strcat('N',int2str(samplePoints(i))));
 	errorDC.(strcat('N',int2str(samplePoints(i)))) = calc_accuracy(currentSolution, parameters);
 end
-%errorShooting = calc_accuracy(solutionShooting, parameters);
+errorShooting = calc_accuracy(solutionShooting, parameters);
 
 % plotting:
 figure; 
 hold on;
-for i = 1:length(samplePoints) 
+for i = 1:length(samplePoints)
    plot(samplePoints(i), sum(errorDC.(strcat('N',int2str(samplePoints(i))))(1,:)),'bo-','MarkerFaceColor','b'); 
-end 
+end
+plot(N_shooting, sum(errorShooting(1,:)),'ro-','MarkerFaceColor','r');
 hold off;
 grid on; 
 xlabel('Points (N)') 
