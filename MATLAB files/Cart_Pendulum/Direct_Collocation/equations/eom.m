@@ -1,7 +1,7 @@
 %% Calculates the equations of motion for the cart-pendulum system
 
 clear
-syms xp yp x y M mp Jp Lc g theta taup
+syms xp yp x y M mp Jp Lc g theta taup f
 
 xp = x-Lc*sin(theta);
 yp = y+Lc*cos(theta);
@@ -19,7 +19,7 @@ Tstar = (1/2)*M*(dx^2 + dy^2) + (1/2)*mp*(dxp^2+dyp^2) + (1/2)*Jp*(dtheta^2);
 
 L = Tstar - V;
 
-eqn1 = simplify(fulldiff(diff(L,dx),GC) - diff(L,x)) == 0;
+eqn1 = simplify(fulldiff(diff(L,dx),GC) - diff(L,x)) == f;
 eqn2 = simplify(fulldiff(diff(L,dtheta),GC) - diff(L,theta)) == taup;
 eqn3 = simplify(fulldiff(diff(L,dy),GC) - diff(L,y)) == 0;
 

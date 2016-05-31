@@ -1,56 +1,60 @@
-function animate_pendulum(t,xout,theta)
+function animate_pendulum(states)
+    %% animate_pendulum(states)
+    % shows an animation of the pendulum, given the states. Note, the
+    % stateformat is
+    %
+    %   +----------+----+
+    %   |  states  |time|
+    %   +----------+----+
+    %
+    % Where 'time' is a columnvector of zeros and endTime as the last
+    % element.
+    
+    simulation.endTime         = states(end,end);
+    states = states(:,1:end-1);
+    N = length(states);
+    simulation.timeStep = simulation.endTime / (N-1);
 
-x = xout(:,1); % position, only
-% get "theta" from "parameters_to_thetas.m"
-if ~exist('theta','var')
-    theta = parameters_to_thetas(t);
-end
+    cart.Positions  = states(3,:);
+    pendulum.Angles = states(1,:);
 
-dt = 0.02;
+    [~, ~, Lc, ~, ~, ~] = set_parameters();
 
-wc = .3;
-hc = .18;
-xc = ([0 1 1 0 0]-.5)*wc;
-yc = [0 0 1 1 0]*hc;
+    cart.Width = .3;
+    cart.Height = .18;
+    cart.Polygon.X = ([0 1 1 0]-.5)*cart.Width;
+    cart.Polygon.Y =  [0 0 1 1]*cart.Height;
 
-[M,mp,Jp,Lc,g,mu] = set_parameters;  % only need Lc...
+    pendulum.Mass.Radius = .07;
+    a = 2*pi*[0:.01:1];
+    pendulum.Mass.Polygon.X = pendulum.Mass.Radius*cos(a);
+    pendulum.Mass.Polygon.Y = pendulum.Mass.Radius*sin(a);
 
-R = .07;
-a = 2*pi*[0:.01:1];
-xdot = R*cos(a);
-ydot = R*sin(a); % to draw pendulum mass...
+    figure(101); clf; grid on; hold on
+    axis image
+    axis([-4 4 -1 3]); 
 
-tani = 0:dt:max(t);
-if t(end)>tani(end)
-    tani = [tani, t(end)];
-end
-
-figure(101); clf; grid on; hold on
-axis image
-axis([-4 4 -1 3]); 
-
-%% Now, do the plotting.
-n=1;
-x_now = interp1(t,x,tani(n));
-theta_now = interp1(t,theta,tani(n));
-dxp = -Lc*sin(theta_now);
-dyp = Lc*cos(theta_now);
-
-%% Avoid re-plotting the same objects. Just redefine x and y coords:
-p1 = patch(x_now+xc,yc,'c','LineWidth',1);
-p2 = plot(x_now+[0 dxp],hc+[0 dyp],'k-','LineWidth',2);
-p3 = patch(x_now+dxp+xdot,hc+dyp+ydot,'c','LineWidth',1);
-drawnow
-
-for n=2:length(tani)
-    pause(dt)
-    x_now = interp1(t,x,tani(n));
-    theta_now = interp1(t,theta,tani(n));
+    %% Now, do the plotting.
+    n=1;
+    x_now = cart.Positions(n);
+    theta_now = pendulum.Angles(n);
     dxp = -Lc*sin(theta_now);
     dyp = Lc*cos(theta_now);
-    set(p1,'XData',x_now+xc);
-    set(p2,'XData',x_now+[0 dxp], 'YData',hc+[0 dyp]);
-    set(p3,'XData',x_now+dxp+xdot, 'YData',hc+dyp+ydot);
+
+    p1 = patch(x_now+cart.Polygon.X, cart.Polygon.Y, 'c', 'LineWidth', 1);
+    p2 = plot(x_now+[0 dxp],cart.Height+[0 dyp],'k-','LineWidth',2);
+    p3 = patch(x_now+dxp+pendulum.Mass.Polygon.X,cart.Height+dyp+pendulum.Mass.Polygon.Y,'c','LineWidth',1);
     drawnow
-    
+
+    for n=2:N
+        pause(simulation.timeStep)
+        x_now = cart.Positions(n);
+        theta_now = pendulum.Angles(n);
+        dxp = -Lc*sin(theta_now);
+        dyp = Lc*cos(theta_now);
+        set(p1,'XData',x_now+cart.Polygon.X);
+        set(p2,'XData',x_now+[0 dxp], 'YData',cart.Height+[0 dyp]);
+        set(p3,'XData',x_now+dxp+pendulum.Mass.Polygon.X, 'YData',cart.Height+dyp+pendulum.Mass.Polygon.Y);
+        drawnow
+    end
 end
