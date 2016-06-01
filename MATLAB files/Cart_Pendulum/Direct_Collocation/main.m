@@ -3,47 +3,31 @@ clear all;
 close all;
 
 %% Set parameters and initial guess
+tic;
 [M, mp, Lc, g, mu, Jp] = set_parameters();
-
-% Need to include the timespan in the optimization problem
-T_max = 2;
+parameters = [M, mp, Lc, g, mu, Jp];
 N = 50;
-h_k = T_max/(N-1);
-t = (0:h_k:T_max);
-parameters = [M, mp, Lc, g, Jp, h_k];
 
-% x = [theta; dtheta; x; dx; y; dy]
-% AND need to include T_max at the end
-
-%Initial guess
-theta = sin(6*t);
-dtheta = [0, diff(theta)];
-x = linspace(0, 1, N);
-dx = [0 diff(x)];
-y = zeros(1,N);
-dy = zeros(1,N);
-taup = ones(1,N); %Better sugetsion for a guess?
-
-initial_guess = [theta; dtheta; x; dx; y; dy; taup];
-
-
+guess.initialState = [0,0,0,0,0,0]';
+guess.time = linspace(0, 2*pi, N);
+[~, initial_guess] = ode45(@(t,x) dynamics(x, 0.1*cos(t), parameters), guess.time, guess.initialState);
+initial_guess = initial_guess';
+initial_guess = [initial_guess; 0.1*cos(guess.time)];
+initial_guess = [initial_guess, [0;0;0;0;0;0;guess.time(end)]];
+toc
 %% Optimization
 solution = optimization(initial_guess, parameters);
-
+toc
 %% Plot solutions
+t = linspace(0, solution(end,end), N);
 figure;
-subplot(2,1,1);
-plot(t, solution(1,:));
+plot(t, solution(1:6,1:end-1));
 xlabel('time');
-ylabel('theta')
+ylabel('states')
 title('Optimal trajectory theta')
+legend('theta','dtheta','x','dx','y','dy');
+%%
+solution(6,end) = solution(end, end);
+solution = solution(1:6,:);
 
-subplot(2,1,2)
-plot(t, solution(3,:));
-xlabel('time');
-ylabel('position cart')
-title('Position cart')
-% 
-
-
-% animate_pendulum(t, solution(3,:), solution(1,:))
+animate_pendulum(solution)
