@@ -5,7 +5,7 @@ function [c,ceq] = collocation_constraints(x, parameters)
 %
 % The collocation constraints are posed in integral form.
 % Approximating done with the trapezoidation method: x_(k+1) = x_k + h_k/2*(f_(k+1) + f_k)
-%%
+
 N = length(x) - 1;
 endTime = x(end, end);
 step = endTime / (N-1);
@@ -35,8 +35,8 @@ boundary.cart.endVelocity.Y = x(6, end);
 
 boundary.pendulum.startPosition = 0;
 boundary.pendulum.startVelocity = 0;
-boundary.pendulum.endPosition = x(1, end);
-boundary.pendulum.endVelocity = x(2, end);
+boundary.pendulum.endPosition = 0;
+boundary.pendulum.endVelocity = 0;
 
 ceq(1:6)        = [boundary.pendulum.startPosition - x(1,1);
                    boundary.pendulum.startVelocity - x(2,1);
