@@ -2,6 +2,7 @@ clc;
 clear all;
 close all;
 
+%% Initial guess for trajectory
 parameters = set_parameters();
 N = 50;
 guess.endTime = 10;
@@ -14,5 +15,7 @@ initial_guess = [initial_guess, [0; guess.endTime]];
 
 %% Optimization
 solution = optimization(initial_guess, parameters);
+
+%% Plot solution
 plot_solution(solution)
 
