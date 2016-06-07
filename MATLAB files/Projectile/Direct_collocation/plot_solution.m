@@ -11,5 +11,7 @@ function plot_solution(solution)
     grid on;
 
     fprintf('time = %f', solution(end,end));
-
+    
+    set(gcf, 'PaperPositionMode', 'auto');
+    print -depsc2 projectile_result.eps
 end

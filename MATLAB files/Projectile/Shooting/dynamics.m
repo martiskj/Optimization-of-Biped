@@ -4,7 +4,7 @@ function x_dot = dynamics(x, t, dx_0, dy_0, parameters)
     % This is to be used in the collocation constraints
 
     %% Projectile system
-    m = parameters(1); g = parameters(2);
+    m = parameters(1); g = parameters(2); x_target = parameters(3); y_target = parameters(4);
 
     x1 = x(1); %x
     x2 = x(2); %dx
