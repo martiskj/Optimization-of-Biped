@@ -35,8 +35,8 @@ boundary.cart.endVelocity.Y = x(6, end);
 
 boundary.pendulum.startPosition = 0;
 boundary.pendulum.startVelocity = 0;
-boundary.pendulum.endPosition = 0;
-boundary.pendulum.endVelocity = 0;
+boundary.pendulum.endPosition = x(1, end);
+boundary.pendulum.endVelocity = x(2, end);
 
 ceq(1:6)        = [boundary.pendulum.startPosition - x(1,1);
                    boundary.pendulum.startVelocity - x(2,1);

@@ -1,8 +1,6 @@
 function x_dot = dynamics(x, t, parameters)
     %% x_dot = dynamics(x, t, parameters)
     
-    %x(1) = y
-    %x(2) = y_dot
     m = parameters(1);
     k = parameters(2);
     xs = parameters(3);

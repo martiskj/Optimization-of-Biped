@@ -18,10 +18,10 @@ function x_dot = dynamics(states, u, parameters)
     
     F_y = Lc*mp*cos(theta)*dtheta^2 - M*g - g*mp + Lc*x2_dot*mp*sin(theta);
     if (abs(dx) > 1e-6)
-        F_friction = mu*F_y*fourier_square(dx, 100, 5);
+        F_friction = friction(F_y, mu, dx, 20);
     else
         F_applied = -Lc*mp*sin(theta)*dtheta^2 +Lc*x2_dot*mp*cos(theta);
-        F_friction = fourier_ramp(F_applied, 1000, 100, mu*F_y);
+        F_friction = friction(F_y, mu, F_applied, 0.5);
     end
 
     x3_dot = dx;
