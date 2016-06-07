@@ -2,8 +2,8 @@ clear all;
 close all;
 clc;
 
-addpath(genpath(strcat(pwd,'\Shooting\')));
-addpath(genpath(strcat(pwd,'\Direct_collocation\')));
+addpath(genpath(strcat(pwd,'/Shooting/')));
+addpath(genpath(strcat(pwd,'/Direct_collocation/')));
 
 init.x  = 0;
 init.dx = 1;

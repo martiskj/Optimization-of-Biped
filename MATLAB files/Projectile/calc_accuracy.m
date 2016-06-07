@@ -1,5 +1,6 @@
 function error = calc_accuracy(solution, parameters)
     %% error = calc_accuracy(solution, parameters)
+
     trajectoryTime = solution(end, end);
     solutionTimeLess = solution(: ,1:end-1);
     N = length(solutionTimeLess);

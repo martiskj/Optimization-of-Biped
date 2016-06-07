@@ -1,6 +1,7 @@
 function init_trajectory = calc_init_trajectory(x_init, N, guess, parameters)
-    %% Calculates a feasible initial guess for the trajectory to be used in direct collocation
-    % init_trajectory = calc_init_trajectory(x_init, N, guess)
+    %% init_trajectory = calc_init_trajectory(x_init, N, guess, parameters)
+    %
+    % Calculates a feasible initial guess for the optimization of the trajectory 
     
     %%
     t_guess = linspace(0, guess.endTime, N);
