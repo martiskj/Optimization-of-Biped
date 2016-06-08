@@ -33,7 +33,6 @@ d2x = simplify(d2x)
 d2y = simplify(d2y)
 taup = simplify(taup)
 
-
 % To display with latex syntax:
 % >>latex(d2theta)
 % etc.

@@ -8,6 +8,4 @@ initial_guess = calc_init_trajectory(x_init, N, guess, parameters);
 
 %% Optimize trajectory
 solution = run_direct_collocation(initial_guess, parameters);
-
-%% Plot
 plot_solution(solution);

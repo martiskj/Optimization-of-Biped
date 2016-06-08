@@ -18,7 +18,6 @@ function plot_solution(solution)
     ylabel('velocity')
     title('Optimal trajectory velocity')
     grid on;
-    
-    set(gcf, 'PaperPositionMode', 'auto');
+
     fprintf('time = %f', solution(end,end));
 end
