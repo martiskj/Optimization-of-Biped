@@ -3,6 +3,7 @@ clear all;
 close all;
 addpath(genpath(strcat(pwd, '/friction_models/')));
 
+%% Initial guess for trajectory
 [M, mp, Lc, g, mu, Jp] = set_parameters();
 parameters = [M, mp, Lc, g, mu, Jp];
 N = 50;
@@ -16,6 +17,4 @@ guess.initialTrajectories = [guess.initialTrajectories, [0;0;0;0;0;0;guess.time(
 
 %% Optimization
 solution = optimization(guess.initialTrajectories, parameters);
-
-%% Plot solutions
 animate_pendulum(solution)

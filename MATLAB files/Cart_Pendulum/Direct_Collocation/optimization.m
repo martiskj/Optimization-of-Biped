@@ -1,11 +1,11 @@
 function solution = optimization(x_init, parameters)
-%% Optimization by direct collocation
-% Uses trapezoid method (assumes dynamics are linear between grid points)
-% Possible to try a more sophisticated approach
+    %% Optimization by direct collocation
+    % Uses trapezoid method (assumes dynamics are linear between grid points)
+    % Possible to try a more sophisticated approach
 
     [dim_x, ~] = size(x_init);
 
-    % Path constraints
+    %% Path constraints
     x_lb = zeros(dim_x,length(x_init));
     x_lb(1,:) = -pi/2;  %theta
     x_lb(2,:) = -2*pi;  %dtheta
@@ -26,7 +26,8 @@ function solution = optimization(x_init, parameters)
     x_ub(7,:) = inf;    %taup
     x_ub(end, end) = 10;%time
 
-    optionsFMINCON = optimoptions(@fmincon, 'Algorithm', 'interior-point', 'Display', 'iter', 'maxFunEvals', 1e6);
+    optionsFMINCON = optimoptions(@fmincon, 'Algorithm', 'interior-point', 'Display', 'iter', 'maxFunEvals', 4e4);
     optimal_trajectory = fmincon(@objective_function, x_init, [],[],[],[], x_lb, x_ub, @(x) collocation_constraints(x,parameters), optionsFMINCON);
 
     solution = optimal_trajectory;
+end

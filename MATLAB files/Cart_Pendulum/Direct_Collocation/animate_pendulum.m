@@ -34,7 +34,7 @@ function animate_pendulum(states)
     axis image
     axis([-4 4 -1 3]); 
 
-    %% Now, do the plotting.
+    %% Plotting.
     n=1;
     x_now = cart.Positions(n);
     theta_now = pendulum.Angles(n);

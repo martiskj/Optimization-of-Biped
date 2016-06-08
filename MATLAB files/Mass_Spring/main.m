@@ -15,7 +15,4 @@ initial_guess = [initial_guess, [0; guess.endTime]];
 
 %% Optimization
 solution = optimization(initial_guess, parameters);
-
-%% Plot solution
 plot_solution(solution)
-

@@ -1,5 +1,4 @@
 function plot_solution(solution)
-    %% plot_solution(solution)
     t = linspace(0, solution(end,end), N);
     figure;
     plot(t, solution(1:6,1:end-1));

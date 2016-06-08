@@ -1,9 +1,8 @@
 function x_dot = dynamics(states, u, parameters)
-%% x_dot = dynamics(x, u, parameters)
-% Dynamics for the system
-% This is to be used in the collocation constraints
+    %% x_dot = dynamics(x, u, parameters)
+    % Dynamics for the system
+    % This is to be used in the collocation constraints
 
-%% Cart-pendulum system
     M = parameters(1); mp = parameters(2); Lc = parameters(3); g = parameters(4); mu = parameters(5); Jp = parameters(6);
     theta   = states(1); 
     dtheta  = states(2);

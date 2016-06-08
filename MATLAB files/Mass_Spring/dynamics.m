@@ -3,7 +3,6 @@ function x_dot = dynamics(x, parameters)
     % Dynamics for the system
     % This is to be used in the collocation constraints
 
-    %% Lossless mass-spring system
     m = parameters(1); k = parameters(2); g = parameters(3);
     x1 = x(1); %position
     x2 = x(2); %velocity
@@ -12,5 +11,4 @@ function x_dot = dynamics(x, parameters)
     x2_dot = -k/m*x1;
 
     x_dot = [x1_dot, x2_dot]';
-
 end

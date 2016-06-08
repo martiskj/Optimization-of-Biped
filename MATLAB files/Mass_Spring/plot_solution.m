@@ -1,5 +1,4 @@
 function plot_solution(solution)
-
     figure;
     N = length(solution)-1;
     maxTime = solution(end, end);
@@ -19,13 +18,7 @@ function plot_solution(solution)
     ylabel('velocity')
     title('Optimal trajectory velocity')
     grid on;
-
-<<<<<<< c23ac474ebd32d817717d5c7db2ad748c1672b49
+    
+    set(gcf, 'PaperPositionMode', 'auto');
     fprintf('time = %f', solution(end,end));
-=======
-set(gcf, 'PaperPositionMode', 'auto');
-print -depsc2 mass_spring_result.eps
-fprintf('time = %f', solution(end,end));
->>>>>>> Made more printable plots
-
 end
