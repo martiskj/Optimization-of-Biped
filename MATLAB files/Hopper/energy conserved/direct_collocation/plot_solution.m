@@ -20,5 +20,8 @@ function plot_solution(solution)
     title('Optimal trajectory velocity')
     grid on;
 
+    set(gcf, 'PaperPositionMode', 'auto');
+    print -depsc2 hopper_dc_result.eps
+    
     fprintf('end time = %f', solution(end,end));
 end

@@ -20,6 +20,12 @@ function plot_solution(solution)
     title('Optimal trajectory velocity')
     grid on;
 
+<<<<<<< c23ac474ebd32d817717d5c7db2ad748c1672b49
     fprintf('time = %f', solution(end,end));
+=======
+set(gcf, 'PaperPositionMode', 'auto');
+print -depsc2 mass_spring_result.eps
+fprintf('time = %f', solution(end,end));
+>>>>>>> Made more printable plots
 
 end

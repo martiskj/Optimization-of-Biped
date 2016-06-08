@@ -16,4 +16,7 @@ function plot_solution(solution, tspan, parameters)
     ylabel('Velocity')
     title('Optimal Trajectory Velocity')
     grid on;
+    
+    set(gcf, 'PaperPositionMode', 'auto');
+    print -depsc2 hopper_shooting_result.eps
 end
